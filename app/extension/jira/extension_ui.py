@@ -10,8 +10,7 @@ from util.conf import JIRA_SETTINGS
 
 def app_specific_action(webdriver, datasets):
     page = BasePage(webdriver)
-    if datasets['custom_issues']:
-        issue_key = datasets['custom_issue_key']
+    issue_key = datasets['issue_key']
 
     # To run action as specific user uncomment code bellow.
     # NOTE: If app_specific_action is running as specific user, make sure that app_specific_action is running
@@ -38,6 +37,7 @@ def app_specific_action(webdriver, datasets):
         def sub_measure():
             page.go_to_url(f"{JIRA_SETTINGS.server_url}/secure/MultipleSubtasksDialog!default.jspa?issueKey={issue_key}")
             page.wait_until_visible((By.ID, "subtaskInputString"))  # Wait for the textarea for subtasks input available
-        sub_measure()
-    measure()
 
+        sub_measure()
+
+    measure()
